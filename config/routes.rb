@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   #顧客側
-  root to: "public/homes#top"
-  namespace :public do
-    get "home/about"=>"homes#about"
+  scope module: :public do
+    root to: "homes#top"
+    get "about", to:"homes#about"
   end
 
   #管理者側
@@ -11,7 +11,13 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
   end
 
-  devise_for :customers
-  devise_for :admins
+  devise_for :customers,controllers: {
+  sessions: 'public/sessions',
+  registrations: 'public/registrations'
+  }
+
+  devise_for :admin,skip: [:registrations,:passwords], controllers: {
+  sessions: 'admin/sessions'
+  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
