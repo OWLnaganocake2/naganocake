@@ -3,6 +3,11 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  # 退会機能
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 
   validates :family_name, presence: true
   validates :first_name, presence: true
