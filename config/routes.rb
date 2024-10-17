@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     get 'customers/my_page' => 'customers#show'
     get 'customers/information/edit' => 'customers#edit'
     patch 'customers/information' => 'customers#update'
+    
+    resources :cart_items, only: %i[index create destroy] do
+     member do
+       patch 'increase'
+       patch 'decrease'
+     end
+   end
+    
   end
 
   namespace :public do
@@ -26,7 +34,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #管理者側
   namespace :admin do
-     root 'home#top'
+    get "/" => 'home#top' 
     resources :items, only: [:index,:new,:edit,:show,:create,:update]
     resources :genres, only: [:index,:create,:edit,:update]
     resources :customers, only: [:index,:show,:edit,:update]
