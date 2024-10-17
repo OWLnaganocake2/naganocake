@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     get 'customers/my_page' => 'customers#show'
     get 'customers/information/edit' => 'customers#edit'
     patch 'customers/information' => 'customers#update'
+    
+    resources :cart_items, only: %i[index create destroy] do
+     member do
+       patch 'increase'
+       patch 'decrease'
+     end
+   end
+    
   end
 
   namespace :public do
