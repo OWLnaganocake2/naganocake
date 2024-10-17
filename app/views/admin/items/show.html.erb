@@ -17,7 +17,7 @@
            <td>ジャンル</td><td><%= @item.genre.name %></td>
          </tr>
          <tr>
-           <td>税込価格</td><td><%= @item.add_tax_sales_price.to_s(:dalimited) %>円</td>
+           <td>税込価格<br/>(税抜価格)</td><td><%= @item.add_tax_sales_price.to_s(:dalimited) %>(<%= @item.price.to_s(:dalimited) %>)円</td>
          </tr>
          <tr>
            <td>販売ステータス</td>
