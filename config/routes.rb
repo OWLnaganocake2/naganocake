@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #管理者側
   namespace :admin do
-     root 'home#top'
+    get "/" => 'home#top' 
     resources :items, only: [:index,:new,:edit,:show,:create,:update]
     resources :genres, only: [:index,:create,:edit,:update]
     resources :customers, only: [:index,:show,:edit,:update]
