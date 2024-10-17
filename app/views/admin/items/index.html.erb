@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
+  <div class="">
       <h2>商品一覧</h2>
 
-  <div class="text-right">
+  <div class="">
       <%= link_to "新規登録" ,new_admin_item_path, class:"btn btn-lg btn-primary" %>
   </div>
   
@@ -18,13 +18,13 @@
         </thead>
 
         <tbody>
-          <% @items.each do |item| %>
+          <% @items_all.each do |item| %>
             <tr>
               <td><%= item.id %></td>
-              <td><%= link_to item.name ,admins_item_path(item) %></td>
-              <td><%= item.price_without_tax.to_s(:delimited, delimiter: ',') %></td>
+              <td><%= link_to item.name ,admin_item_path(item) %></td>
+              <td><%= item.price.to_s(:delimited, delimiter: ',') %></td>
               <td><%= item.genre.name %></td>
-              <td><% if item.is_sales_status == false %>
+              <td><% if item.is_active == false %>
               販売中
               <% else %>
               販売停止中
