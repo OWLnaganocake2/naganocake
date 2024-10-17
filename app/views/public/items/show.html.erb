@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+    <div class="col">
+      <%= attached_image_tag @item, :image, width: "60%", format: "jpg", fallback: "no_image.jpg".           %>
+    </div>
+    <div>
+      <h2><strong><%= @item.name%></strong></h2>
+      <h4><%= simple_format(@item.item_details) %></h4>
+      <% if @item.is_active == true %>
+        <p>販売中</p>
+        <h3>¥ <%= change_price(@item.price) %> (税込)</h3>
+        <p><%= render "item_quantity_form",cart_item: @cart_item, item: @item %></p>
+      <% else %>
+        <h3>販売停止中です</h3>
+      <% end %>
+    </div>
+  </div>
+</div>

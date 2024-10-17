@@ -1,0 +1,5 @@
+<%= form_with model: cart_item, local:true do |f| %>
+  <%= f.hidden_field :item_id, :value => item_id %>
+  <%= f.number_field :quantity, placeholder:"個数選択" %>
+  <%= f.submit "カートに入れる", class: "btn btn-success" %>
+<% end %>
