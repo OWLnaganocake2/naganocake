@@ -1,0 +1,49 @@
+ <div class="row">
+  <div class="">
+    <div class="row">
+    <%= form_for(@items, url: admin_items_path) do |f| %>
+    <div class="">
+     <h2>商品新規登録</h2>
+    <br><br><br>
+      <div class="">
+        <table class="">
+          <tbody>
+            <tr>
+            <th>商品画像</th>
+            <td><%= f.file_field :item_image, placeholder: "ファイルを選択", accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <th>商品名</th>
+              <td><%= f.text_field :name, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <th>商品説明</th>
+              <td><%= f.text_area :item_details, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <th>ジャンル</th>
+              <td><%= f.collection_select :genre_id, Genre.all ,:id, :name, include_blank: "--選択してください--" %></td>
+            </tr>
+            <tr>
+              <th>税抜価格</th>
+              <td><%= f.text_field :price, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td>販売ステータス</td>
+              <td>
+                <%= f.radio_button :is_active, :true %>
+                <%= f.label :is_active, "販売中"  %>
+                <%= f.radio_button :is_active, :false %>
+                <%= f.label :is_active, "販売停止中" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="">
+        <%= f.submit "新規登録" ,class: "btn btn-primary text-right" %>
+        </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
