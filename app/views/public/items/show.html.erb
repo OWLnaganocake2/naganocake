@@ -1,17 +1,22 @@
 <div class="container">
 	<div class="row">
     <div class="col">
-      <%= attached_image_tag @item, :image, width: "60%", format: "jpg", fallback: "no_image.jpg".           %>
+      <%= attached_image_tag @item, :image, width: "60%", format: "jpeg", fallback: "no_image.jpg" %>
     </div>
-    <div>
+    <div class="col">
       <h2><strong><%= @item.name%></strong></h2>
-      <h4><%= simple_format(@item.item_details) %></h4>
+      <h4><%= @item.item_details %></h4>
+    </div>
       <% if @item.is_active == true %>
-        <p>販売中</p>
-        <h3>¥ <%= change_price(@item.price) %> (税込)</h3>
-        <p><%= render "item_quantity_form",cart_item: @cart_item, item: @item %></p>
+        <h3>¥ <%= @item.add_tax_sales_price.to_s(:dalimited) %> (税込)</td></h3>
+        <p><%= form.select :quantity, [['1個', 1], ['2個', 2], ['3個', 3], ['4個', 4], ['5個', 5], ['6個', 6], ['7個', 7], ['8個', 8], ['9個', 9]], {:prompt => "個数選択"} %></p>
+        <%= form_with model: @cart_item, local:true do |f| %>
+          <%= f.hidden_field :item_id, :value => item_id %>
+          <%= f.number_field :amount, placeholder:"個数選択" %>
+          <%= f.submit "カートに入れる", class: "btn btn-success" %>
+        <% end %>
       <% else %>
-        <h3>販売停止中です</h3>
+        <h3>この商品は販売停止中です。</h3>
       <% end %>
     </div>
   </div>
