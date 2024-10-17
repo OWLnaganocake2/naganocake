@@ -4,19 +4,19 @@
       <h2>商品一覧(全<%= @items_all.count %>件)</h2>
     </div>
   </div>
-  <div class="row mt-3 mb-3 text-center text-xs-center text-sm-center text-md-left">
+  <div>
     <%= @items.each do |item| %>
-    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-3">
-      <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
+    <div>
+      <div>
         <%= link_to item_path(item) do %>
-          <p><!-- class="img-wrap" --><%= attachment_image_tag item, :image, width: "80%", format: "jpg", fallback: "no_image.jpg" %></p>
+          <p><%= attachment_image_tag item, :image, width: "80%", format: "jpg", fallback: "no_image.jpg" %></p>
         <% end %>
-        <div><!-- class="card-body" -->
-          <p><!-- class="item-details item-name card-text" -->商品名 <%= item.name %></p>
+        <div>
+          <p>商品名 <%= item.name %></p>
           <% if item.is_active == true %>
-            <p><!-- class="item-details card-text" -->¥<%= item.price %></p>
+            <p>¥<%= item.price %></p>
           <% else %>
-            <p><!-- class="text-danger font-weight-bold card-text" -->販売停止中</p>
+            <p>販売停止中</p>
           <% end %>
         </div>
       </div>
@@ -24,4 +24,4 @@
     <% end %>
   </div>
   <%= paginate @items, class: "text-center" %>
-</div
+</div>

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :items, only: [:index, :show]
     get 'customers/my_page' => 'customers#show'
-    get 'customers/infomation/edit' => 'customers#edit',as: 'edit/customers'
+    get 'customers/information/edit' => 'customers#edit'
+    patch 'customers/information' => 'customers#update'
   end
 
   devise_for :customers,controllers: {
