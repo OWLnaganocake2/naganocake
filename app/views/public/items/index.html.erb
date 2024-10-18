@@ -11,7 +11,7 @@
       <% end %>
       <p>商品名 <%= item.name %></p>
       <% if item.is_active == true %>
-        <p>¥<%= item.price,to_s(:dalimited) %></p>
+        <p>¥<%= item.price.to_s(:dalimited) %></p>
       <% else %>
         <p>販売停止中</p>
       <% end %>
