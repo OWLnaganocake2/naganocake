@@ -9,10 +9,8 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-
-  <% if customer_signed_in? %>
-    <body>
+<body>
+ 
     <!-- ヘッダー -->
     <div id="header">
       <%= render "layouts/header" %>
@@ -25,22 +23,6 @@
 
     <!-- Footer -->
     <%= render "layouts/footer" %>
-    </body>
-
-  <% elsif admin_signed_in? %>
-    <body>
-    <!-- ヘッダー -->
-    <div id="header">
-      <%= render "layouts/header" %>
-    </div>
-
-    <!-- Body部分 -->
-    <div class="container">
-      <%= yield %>
-    </div>
-
-    <!-- Footer -->
-    <%= render "layouts/footer" %>
-    </body>
-  <% end %>
+  </body
+  
 </html>
