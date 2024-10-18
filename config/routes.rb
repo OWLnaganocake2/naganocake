@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   #顧客側
   scope module: :public do
     root to: "homes#top"
@@ -11,14 +11,14 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe' => 'customers#unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw'
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
-    
+
     resources :cart_items, only: %i[index create destroy] do
      member do
        patch 'increase'
        patch 'decrease'
      end
    end
-    
+
   end
 
   namespace :public do
@@ -37,12 +37,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #管理者側
   namespace :admin do
-    get "/" => 'home#top' 
+    get "/" => 'home#top'
     resources :items, only: [:index,:new,:edit,:show,:create,:update]
     resources :genres, only: [:index,:create,:edit,:update]
     resources :customers, only: [:index,:show,:edit,:update]
     resources :orders, only: [:show,:update]
     resources :order_details, only: [:update]
   end
-  
+
+  get '/search' => 'seaches#search'
+
 end
