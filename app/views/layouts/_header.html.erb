@@ -2,7 +2,7 @@
   <h1><%= link_to "LOGO", "/" %></h1>
   <ul>
     <% if customer_signed_in? %>
-    
+
       <!--カスタマーがログインしている時 -->
       <li>
         ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん！
@@ -39,9 +39,11 @@
         <!--genre一覧-->
       </li>
       <li>
-        <%= link_to "ログアウト", "#"%><!-- destroy_admin_session_path -->
+
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+
       </li>
-      
+
     <% else %>
 
       <!-- ログインしていない時 -->
@@ -49,7 +51,7 @@
         <%= link_to "About", about_path %>
       </li>
       <li>
-        <%= link_to "商品一覧", items_path %>　
+        <%= link_to "商品一覧", items_path %>
       </li>
       <li>
         <%= link_to "新規登録", "#" %> <!--会員新規登録画面用パス入力-->
