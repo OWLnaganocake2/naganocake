@@ -14,6 +14,7 @@ class Public::CustomersController < ApplicationController
       redirect_to customers_my_page_path
     else
       render 'edit'
+    end
   end
 
   def unsubscrive
