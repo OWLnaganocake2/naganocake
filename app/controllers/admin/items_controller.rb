@@ -16,7 +16,7 @@ class Admin::ItemsController < ApplicationController
     end
     
     def create
-    @item = Item.new(_params)
+    @item = Item.new(item_params)
       if @item.save
         flash[:notice] = "商品情報を作成しました！"
          redirect_to item_path(@item.id)
@@ -43,11 +43,12 @@ class Admin::ItemsController < ApplicationController
 
 
 
-   private
-   
-    def item_params
-      params.require(:item).permit(:genre_id, :name, :description, :price_without_tax, :image, :is_sales_status)
-    end
+
+    private
+
+  def item_params
+    params.require(:item).permit(:name,:genre_id,:item_image, :item_details, :price, :is_active)
+  end
   
  
 end
