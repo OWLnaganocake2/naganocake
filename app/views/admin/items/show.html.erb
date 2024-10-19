@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-5">
   <h2>商品詳細</h2>
-   <%= image_tag @item.get_item_image(300,300) %>
+   <%= image_tag @item.get_item_image(300,300)|| "no_image.jpg", width: "60%" %>
    </div>
    
    <div class="col-lg-7">

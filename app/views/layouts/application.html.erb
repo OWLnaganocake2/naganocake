@@ -11,6 +11,18 @@
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+    <!-- ヘッダー -->
+    <div id="header">
+      <%= render "layouts/header" %>
+    </div>
+
+    <!-- Body部分 -->
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <!-- Footer -->
+    <%= render "layouts/footer" %>
+    </body>
 </html>
+
