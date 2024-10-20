@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'pages/home'
+  end
   #顧客側
   scope module: :public do
     root to: "homes#top"
@@ -17,12 +20,12 @@ Rails.application.routes.draw do
   #   resources :customers do
   #   resources :cart_items, only: [:update,:destroy,:index,:create] 
   # end
-    
-    
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all_cart_items'
-    resources :cart_items, only: [:index, :update, :destroy, :create] 
 
-
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    resources :orders, only: [:new, :create, :index, :show]
+    get 'orders/thanks' => 'orders#thanks'
+    post 'orders/confirm' => 'orders#confirm'
   end
 
   namespace :public do
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #管理者側
   namespace :admin do
-    get "/" => 'home#top'
+    root to: 'pages#home'
     resources :items, only: [:index,:new,:edit,:show,:create,:update]
     resources :genres, only: [:index,:create,:edit,:update]
     resources :customers, only: [:index,:show,:edit,:update]
@@ -49,5 +52,7 @@ Rails.application.routes.draw do
     resources :order_details, only: [:update]
   end
 
+
   get '/search' => 'seaches#search'
+
 end
