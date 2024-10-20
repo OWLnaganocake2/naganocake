@@ -19,7 +19,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
       if @item.save
         flash[:notice] = "商品情報を作成しました！"
-         redirect_to item_path(@item.id)
+         redirect_to admin_item_path(@item.id)
       else
         flash[:notice] = "商品情報の作成に失敗しました！" 
         redirect_to new_admin_item_path

@@ -8,14 +8,6 @@
 # Admin.create!(email: "admin@example.jp",
 #               password:  "123456",
 #               password_confirmation: "123456",)
-                
-# Item.create!(genre_id: "1",
-#             name: "ショートケーキ",
-#             item_details: "おいしいよ",
-#             price: "1000",
-#             is_active: "true")
-
-# Genre.create!(name:"ケーキ")
 
 # Customer.create!(family_name:"長澤",
 #                 first_name:"まさみ",
@@ -29,3 +21,17 @@
 #                 password_confirmation: "123456",
 #                 is_deleted:"false"
 #                 )
+
+# Genre.create!(name:"ホールケーキ")
+# Genre.create!(name:"ポーション")
+# Genre.create!(name:"焼き菓子")
+# Genre.create!(name:"ギフト")
+# Genre.create!(name:"ブレッド")
+
+# Item.create!(genre_id: "1",
+#             name: "ショートケーキ",
+#             item_details: "おいしいよ",
+#             price: "1000",
+#             is_active: "true")
+
+

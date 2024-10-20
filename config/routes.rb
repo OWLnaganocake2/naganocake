@@ -12,13 +12,13 @@ Rails.application.routes.draw do
     patch 'customers/withdraw' => 'customers#withdraw'
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     
-    resources :cart_items, only: %i[index create destroy] do
-     member do
-       patch 'increase'
-       patch 'decrease'
-     end
-   end
+  #   resources :customers do
+  #   resources :cart_items, only: [:update,:destroy,:index,:create] 
+  # end
     
+    
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all_cart_items'
+    resources :cart_items, only: [:index, :update, :destroy, :create] 
   end
 
   namespace :public do

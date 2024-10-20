@@ -6,14 +6,14 @@
       <%= link_to "新規登録" ,new_admin_item_path, class:"btn btn-lg btn-primary" %>
   </div>
   
-      <table class="table">
-        <thead>
+      <table class="table table-lg">
+        <thead class="thead-light">
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
+            <th class="col-2">商品ID</th>
+            <th class="col-3">商品名</th>
+            <th class="col-2">税抜価格</th>
+            <th class="col-3">ジャンル</th>
+            <th class="col-2">ステータス</th>
           </tr>
         </thead>
 
@@ -24,16 +24,17 @@
               <td><%= link_to item.name ,admin_item_path(item) %></td>
               <td><%= item.price.to_s(:delimited, delimiter: ',') %></td>
               <td><%= item.genre.name %></td>
-              <td><% if item.is_active == false %>
-              販売中
-              <% else %>
-              販売停止中
-              <% end %>
-              </td>
+              <td>
+               <%if item.is_active == true %>
+                 <div class="text-success font-weight-bolder">販売中</div>
+               <% else %>
+                 <div class="text-muted font-weight-bolder">販売停止中</div>
+               <% end %>
             </tr>
             <% end %>
-            <%= paginate @items,class: "text-center" %>
+           
         </tbody>
       </table>
+       <%= paginate @items,class: "text-center" %>
     </div>
  
