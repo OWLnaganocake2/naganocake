@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   #顧客側
   scope module: :public do
     root to: "homes#top"
@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe' => 'customers#unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw'
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
-    
+    resources :orders, only: [:index, :show]
+
     resources :cart_items, only: %i[index create destroy] do
      member do
        patch 'increase'
@@ -45,4 +46,5 @@ Rails.application.routes.draw do
     resources :order_details, only: [:update]
   end
 
+  get '/search' => 'seaches#search'
 end
