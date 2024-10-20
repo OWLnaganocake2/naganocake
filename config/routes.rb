@@ -17,12 +17,17 @@ Rails.application.routes.draw do
   #   resources :customers do
   #   resources :cart_items, only: [:update,:destroy,:index,:create] 
   # end
-    
-    
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all_cart_items'
+<<<<<<< Updated upstream
     resources :cart_items, only: [:index, :update, :destroy, :create] 
 
 
+=======
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    resources orders, only: [:new, :create, :index, :show]
+    get 'orders/thanks' => 'orders#thanks'
+    post 'orders/confirm' => 'orders#confirm'
+>>>>>>> Stashed changes
   end
 
   namespace :public do
@@ -49,5 +54,7 @@ Rails.application.routes.draw do
     resources :order_details, only: [:update]
   end
 
+
   get '/search' => 'seaches#search'
+
 end
