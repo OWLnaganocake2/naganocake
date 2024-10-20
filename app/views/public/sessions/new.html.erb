@@ -1,51 +1,53 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <h2 class="text-center">ログイン</h2>
+  <div class="form-group row" style="padding:20px;">
+    <div class="col-6 offset-3" style="border-radius: 30px; background-color: lightblue; padding-top:5px;">
+      <h2 class="text-center text-white">ログイン</h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 text-center">
-      <P>会員の方はこちらからログイン</P>
+
+  <div class="row" style="padding-bottom:20px;">
+    <div class="col-4 offset-4" style="border-radius: 30px; background-color: lightblue; padding-top:5px;">
+      <h5 class="text-center text-white">会員の方はこちらからログイン</h5>
     </div>
   </div>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="row">
-      <div class="col-md-3 offset-md-3">
+    <div class="form-group row">
+      <div class="col-2 offset-2">
         メールアドレス
       </div>
-      <div class="col-md-3">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="col-6" style="margin-bottom: 15px;">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100" %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-3 offset-md-3">
+
+    <div class="form-group row">
+      <div class="col-2 offset-2">
         パスワード
       </div>
-      <div class="col-md-3">
-        <%= f.password_field :password, autocomplete: "current-password" %>
+      <div class="col-6">
+        <%= f.password_field :password, autocomplete: "current-password", class: "w-100" %>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-md-6 offset-md-6">
+      <div class="col-6 offset-4" style="margin-bottom: 15px;">
         <% if devise_mapping.rememberable? %>
-          <div class="field">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
+            <%= f.label :remember_me, "ログイン状態を維持する" %>
         <% end %>
       </div>
     </div>
-    <div class="row">
+
+    <div class="row" style="margin-bottom:50px;">
       <div class="col-md-12 text-center">
         <%= f.submit "ログイン", class: "btn btn-success" %>
       </div>
     </div>
   <% end %>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h5>会員登録がお済でない方</h5>
+  <div class="row" style="padding-bottom:20px;">
+    <div class="col-4 offset-4" style="border-radius: 30px; background-color: lightblue; padding-top:5px;">
+      <h5 class="text-center text-white">会員登録がお済でない方</h5>
     </div>
   </div>
   <div class="row">

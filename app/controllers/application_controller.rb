@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
         admin_items_path
       when Customer
         root_path
-		end
-	end
+    end
+  end
 
   # def after_sign_out_path_for(resource)
   #   case resource
@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
 
   protected
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :encrypted_password, :last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :phone_number])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:family_name, :first_name, :family_name_kana, :first_name_kana, :email, :post_code, :address, :tell_number, :password])
     end
 end
