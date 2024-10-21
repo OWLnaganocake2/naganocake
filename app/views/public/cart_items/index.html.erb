@@ -20,7 +20,7 @@
             <td class="col-xs-3"><%= image_tag cart_item.item.get_item_image(60,50)|| "no_image.jpg" %><%= cart_item.item.name %></td>
             <td class="col-xs-2">¥<%= (cart_item.item.add_tax_sales_price).to_s(:delimited, delimiter: ',') %></td>
             <td class="col-xs-1">
-              <%= form_with model: cart_item, url: cart_items_path(cart_item), local: true do |f| %>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true do |f| %>
              <p>
               <%= f.select :amount, (1..9).map { |n| [n.to_s, n] }, prompt: "選択してください" %>
               <%= f.submit "変更", class: "btn btn-primary" %>
