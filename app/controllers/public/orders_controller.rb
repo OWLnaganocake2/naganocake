@@ -3,6 +3,12 @@ class Public::OrdersController < ApplicationController
         @order = Order.new
         @customer = current_customer
         # @addresses = Address.where(customer_id: current_customer.id)
+         sum = 0
+         cart_items = current_customer.cart_items
+        cart_items.each do |cart_item|
+            sum += (cart_item.item.price * 1.1).floor * cart_item.amount
+        end
+        @total_price = sum
     end
 
     def create
@@ -17,7 +23,7 @@ class Public::OrdersController < ApplicationController
             sum += (cart_item.item.price * 1.1).floor * cart_item.amount
         end
 
-        session[:order][:shipping_fee] = 800
+    
         session[:order][:total_price] = sum + session[:order][:shipping_fee]
         session[:order][:status] = 0
         session[:order][:customer_id] = current_customer.id
@@ -30,25 +36,25 @@ class Public::OrdersController < ApplicationController
         # ご自身の住所が選択された時
         if destination == 0
 
-            session[:order][:post_code] = customer.post_code
-            session[:order][:address] = customer.address
-            session[:order][:name] = customer.family_name + customer.first_name
+            params[:order][:post_code] = customer.post_code
+            params[:order][:address] = customer.address
+            params[:order][:name] = customer.family_name + customer.first_name
 
         # 登録済住所が選択された時
         elsif destination == 1
 
             address = Address.find(params[:address_for_order])
-            session[:order][:post_code] = address.post_code
-            session[:order][:address] = address.address
-            session[:order][:name] = address.name
+            params[:order][:post_code] = address.post_code
+            params[:order][:address] = address.address
+            params[:order][:name] = address.name
 
         # 新しいお届け先が選択された時
         elsif destination == 2
 
-            session[:new_address] = 2
-            session[:order][:post_code] = params[:post_code]
-            session[:order][:address] = params[:address]
-            session[:order][:name] = params[:name]
+            params[:new_address] = 2
+            params[:order][:post_code] = params[:post_code]
+            params[:order][:address] = params[:address]
+            params[:order][:name] = params[:name]
 
         end
 
@@ -62,6 +68,46 @@ class Public::OrdersController < ApplicationController
 
     def confirm
         @cart_items = current_customer.cart_items
+        sum = 0
+         cart_items = current_customer.cart_items
+        cart_items.each do |cart_item|
+            sum += (cart_item.item.price * 1.1).floor * cart_item.amount
+        end
+        @total_price = sum
+        @shipping_fee = 800
+        if params[:order][:payment_method] == "0"
+            @payment_method = "クレジットカード"
+        elsif params[:order][:payment_method] == "1"
+            @payment_method = "銀行振込"
+        end
+        
+        destination = params[:a_method].to_i
+        
+        if destination == 0
+
+            @post_code = current_customer.post_code
+            @address = current_customer.address
+            @name = current_customer.family_name + current_customer.first_name
+
+        # 登録済住所が選択された時
+        elsif destination == 1
+
+            address = Address.find(params[:address_for_order])
+            params[:order][:post_code] = address.post_code
+            params[:order][:address] = address.address
+            params[:order][:name] = address.name
+
+        # 新しいお届け先が選択された時
+        elsif destination == 2
+
+            params[:new_address] = 2
+            @post_code = params[:post_code]
+            @address = params[:address]
+            @name = params[:name]
+
+        end
+        
+        
     end
 
     def thanks
