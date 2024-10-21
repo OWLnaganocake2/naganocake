@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col-xs-12">
 		<h3><strong>注文情報入力</strong></h3>
-		  <%= form_with model: @order, local: true do |f| %>
+		  <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
 		    <h4>支払方法</h4>
-		    <span>　　　</span><%= f.radio_button :payment_method, "credit_card", checked: "checked" %>
-		    <%= f.label :payment_method_credit_card, "クレジットカード" %><br>
-		    <span>　　　</span><%= f.radio_button :payment_method, "transfer" %>
-		    <%= f.label :payment_method_transfer, "銀行振込" %>
+		    <span>　　　</span><%= f.radio_button :payment_method, 0, checked: "checked" %>
+		    <%= f.label :payment_method, "クレジットカード" %><br>
+		    <span>　　　</span><%= f.radio_button :payment_method, 1 %>
+		    <%= f.label :payment_method, "銀行振込" %>
 
 		    <h4>お届け先</h4>
             <span>　　　</span><%= f.radio_button :a_method, 0, checked: "checked" %>
             <%= f.label :ご自身の住所 %><br>
-            <span>　　　</span><%= @customer.post_code %><%= @customer.address %>
+            <span>　　　</span>〒<%= @customer.post_code %> <%= @customer.address %><br>
             <span>　　　</span><%= @customer.family_name %><%= @customer.first_name %><br>
 
 
