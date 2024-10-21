@@ -48,7 +48,9 @@ Rails.application.routes.draw do
     root to: 'pages#home'
     resources :items, only: [:index,:new,:edit,:show,:create,:update]
     resources :genres, only: [:index,:create,:edit,:update]
-    resources :customers, only: [:index,:show,:edit,:update]
+    resources :customers, only: [:index,:show,:edit,:update] do
+     resources :order, only: [:index]
+    end
     resources :orders, only: [:show,:update]
     resources :order_details, only: [:update]
   end
