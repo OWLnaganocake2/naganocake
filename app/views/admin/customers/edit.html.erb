@@ -1,43 +1,52 @@
-<div class='container'>
   <div class='row'>
-    <div class='col-md-10 offset-md-1'>
-      <h1><%= customer.family_name + customer.first_name %>さんの会員情報編集</h1>
-      <table>
+    <%= form_with model: @customer, url: admin_customer_path do |f| %>
+
+      <h2><%= @customer.family_name + @customer.first_name %>さんの会員情報編集</h2>
+    
+      <table class="table table-borderless">
         <tr>
           <th>会員ID</th>
-          <td><%= customer.id %></td>
+          <td><%= @customer.id %></td>
         </tr>
         <tr>
           <th>氏名</th>
-          <td><%= f.text_field :family_name, :size => "8" %> <%= f.text_field :first_name, :size => "8" %></td>
+          <td><%= f.text_field :family_name, size: "16" %> &nbsp;&nbsp;&nbsp;&nbsp;<%= f.text_field :first_name, size: "16" %></td>
         </tr>
         <tr>
           <th>フリガナ</th>
-          <td><%= f.text_field :family_name_kana, :size => "8" %> <%= f.text_field :first_name_kana, :size => "8" %></td>
+          <td><%= f.text_field :family_name_kana, size: "16" %> &nbsp;&nbsp;&nbsp;&nbsp;<%= f.text_field :first_name_kana, size: "16" %></td>
         </tr>
         <tr>
           <th>郵便番号</th>
-          <td><%= f.text_field :post_code, :size => "8" %></td>
+          <td><%= f.text_field :post_code, size: "16" %></td>
         </tr>
         <tr>
           <th>住所</th>
-          <td><%= f.text_field :address, :size => "16" %></td>
+          <td><%= f.text_field :address, size: "64" %></td>
         </tr>
         <tr>
           <th>電話番号</th>
-          <td><%= f.text_field :tell_number, :size => "8" %></td>
+          <td><%= f.text_field :tell_number, size: "16" %></td>
         </tr>
         <tr>
           <th>メールアドレス</th>
-          <td><%= f.text_field :email, :size => "8" %></td>
+          <td><%= f.text_field :email, size: "16" %></td>
         </tr>
-      </table>
-      <table>
         <tr>
-          <td><%= f.submit "変更を保存", class: "btn btn-secondary btn-block" %></td>
+          <td>販売ステータス</td>
+          <td>
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted, "有効"  %>
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted, "退会" %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-center">
+            <%= f.submit "変更を保存", class: "btn btn-success" %>
+          </td>
         </tr>
       </table>
-    </div>
+ 
+    <% end %>
   </div>
-</div>
-
