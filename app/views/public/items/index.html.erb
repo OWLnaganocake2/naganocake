@@ -5,9 +5,9 @@
     </div>
   </div>
   <div>
-    <%= @items.each do |item| %>
+    <% @items.each do |item| %>
       <%= link_to item_path(item) do %>
-        <p><%= image_tag item.get_item_image(60,50)|| "no_image.jpg" %></p>
+        <p><%= image_tag item.get_item_image(250,200)|| "no_image.jpg" %></p>
       <% end %>
       <p>商品名 <%= item.name %></p>
       <% if item.is_active == true %>

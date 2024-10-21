@@ -2,10 +2,11 @@ class Public::OrdersController < ApplicationController
     def new
         @order = Order.new
         @customer = current_customer
+        # @addresses = Address.where(customer_id: current_customer.id)
     end
 
     def create
-        customer = currrent_customer
+        customer = current_customer
 
         session[:order] = Order.new
 
@@ -20,9 +21,11 @@ class Public::OrdersController < ApplicationController
         session[:order][:total_price] = sum + session[:order][:shipping_fee]
         session[:order][:status] = 0
         session[:order][:customer_id] = current_customer.id
+        # ラジオボタンで選択された支払方法のenum番号を渡している
+		session[:order][:payment_method] = params[:payment_method].to_i
 
         # ラジオボタンで選択されたお届け先によって条件分岐
-        destination = params[:method].to_i
+        destination = params[:a_method].to_i
 
         # ご自身の住所が選択された時
         if destination == 0
@@ -61,12 +64,39 @@ class Public::OrdersController < ApplicationController
         @cart_items = current_customer.cart_items
     end
 
+    def thanks
+        order = Order.new(session[:order])
+        order.save
+
+        if session[:new_address]
+            address = current_customer.addresses.new
+            address.post_code = order.post_code
+            address.address = order.address
+            address.name = order.name
+            address.save
+            session[:new_address] = nil
+        end
+
+        cart_items = current_customer.cart_items
+        cart_items.each do |cart_item|
+            order_detail = OrderDetail.new
+            order_detail.order_id = order_id
+            order_detail.item_id = cart_item.item_id
+            order_detail.amount = cart_item.amount
+            order_detail.making_status = 0
+            order_detail.price = cart_item.item.add_tax_sales_price
+            order_detail.save
+        end
+
+
+    end
+
     def index
-        # @orders = current_customer.orders
-        @orders = Order.all #新規顧客登録完了後変数変更
+        @orders = current_customer.orders
     end
 
     def show
         @order = Order.find(params[:id])
+        @order_details = @order.order_details
     end
 end
