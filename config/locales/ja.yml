@@ -22,6 +22,15 @@ ja:
         post_code: "郵便番号"
         address: "住所"
         name: "宛名"
+      customer:
+        family_name: "氏名(姓)"
+        first_name: "氏名(名)"
+        family_name_kana: "フリガナ(姓)"
+        first_name_kana: "フリガナ(名)"
+        email: "メールアドレス"
+        post_code: "郵便番号"
+        address: "住所"
+        tell_number: "電話番号"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

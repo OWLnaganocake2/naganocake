@@ -22,15 +22,16 @@ class Public::OrdersController < ApplicationController
     end
 
     def create
-        customer = current_customer
-        @order = Order.new
-      if @order.save
+        @order = Order.new(order_params)
+        @order.status = 0
+        @order.customer_id = current_customer.id
+    if @order.save!
         flash[:notice] = "注文情報を作成しました！"
-         redirect_to orders_thanks_path
-      else
-        flash[:notice] = "注文情報の作成に失敗しました！" 
-        render order_new_path
-      end
+        redirect_to orders_thanks_path
+    else
+        flash[:notice] = "注文情報の作成に失敗しました！"
+        redirect_to new_order_path
+    end
     end
 
 
@@ -78,7 +79,7 @@ class Public::OrdersController < ApplicationController
             @post_code = params[:order][:post_code]
             @address = params[:order][:address]
             @name = params[:order][:name]
-          end
+         end
     end
 
     def thanks
