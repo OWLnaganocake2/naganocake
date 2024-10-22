@@ -1,25 +1,33 @@
 <div class="row">
   <div class="col-xs-12">
-		<h3><strong>注文情報入力</strong></h3>
-		  <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
-		    <h4>支払方法</h4>
-		    <span>　　　</span><%= f.radio_button :payment_method, 0, checked: "checked" %>
-		    <%= f.label :payment_method, "クレジットカード" %><br>
-		    <span>　　　</span><%= f.radio_button :payment_method, 1 %>
-		    <%= f.label :payment_method, "銀行振込" %>
+    <h3><strong>注文情報入力</strong></h3>
+    <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
+      
+      <h4>支払方法</h4>
+      <div>
+        <%= f.radio_button :payment_method, 0, checked: "checked" %>
+        <%= f.label :payment_method, "クレジットカード" %>
+      </div>
+      <div>
+        <%= f.radio_button :payment_method, 1 %>
+        <%= f.label :payment_method, "銀行振込" %>
+      </div>
 
-		    <h4>お届け先</h4>
-            <span>　　　</span><%= f.radio_button :a_method, 0, checked: "checked" %>
-            <%= f.label :ご自身の住所 %><br>
-            <span>　　　</span>〒<%= @customer.post_code %> <%= @customer.address %><br>
-            <span>　　　</span><%= @customer.family_name %><%= @customer.first_name %><br>
-
-
-            <span>　　　</span><%= f.radio_button :a_method, 1 %>
+      <h4>お届け先</h4>
+      <div>
+        <%= f.radio_button :a_method, 0, checked: "checked" %>
+        <%= f.label :ご自身の住所 %>
+        <div>
+          〒<%= @customer.post_code %> <%= @customer.address %><br>
+          <%= @customer.family_name %> <%= @customer.first_name %>
+        </div>
+      </div>
+      
+      <div>
+        <span>　　　</span><%= f.radio_button :a_method, 1 %>
 			<%= f.label :登録済住所から選択 %><br>
 			<span>　　　</span><%= f.collection_select :address_id, @addresses, :id, :full_address, prompt: "住所を選択" %><br>
-
-
+        
 			<span>　　　</span><%= f.radio_button :a_method, 2 %>
 			<%= f.label :新しいお届け先 %><br>
 			<div class="form-group row">
@@ -38,13 +46,10 @@
 			  <%= f.label :"宛名", class: "col-md-6 col-form-label" %>
 			  <div class="col-md-6">
 			    <%= f.text_field :name, class: "form-control" %>
-			  </div>
-			</div>
+        </div>
 
-	   		<%= f.submit "確認画面へ進む", class: 'btn btn-success' %>
-				<%= f.hidden_field :shipping_fee, value: 800 %>
-
-		  <% end %>
-
+      <%= f.submit "確認画面へ進む", class: 'btn btn-success' %>
+      <%= f.hidden_field :shipping_fee, value: 800 %>
+    <% end %>
   </div>
 </div>
