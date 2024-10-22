@@ -1,42 +1,42 @@
 <div class='container my-5'>
-  
+
   <h4 class='row mb-5'>
     <div>　　　　　</div><span class='heading-title'>会員情報編集</span>
   </h4>
-  
+
   <%= render 'layouts/errors', obj: @customer %>
-  
+
   <%= form_with model: @customer, url: customers_information_path, method: :patch do |f| %>
         <div class='row form-group'>
           <label class="col-2">氏名</label>
-          <%= f.text_field :family_name, class: 'form-control col-2' %>
-          <%= f.text_field :first_name, class: 'form-control col-2 ml-1' %>
+          <%= f.text_field :family_name, class: 'form-control col-2',style: 'min-width: 185px;' %>
+          <%= f.text_field :first_name, class: 'form-control col-2 ml-1',style: 'min-width: 185px;' %>
         </div>
 
         <div class='row form-group'>
           <label class="col-2">フリガナ</label>
-          <%= f.text_field :family_name_kana, class: 'form-control col-2' %>
-          <%= f.text_field :first_name_kana, class: 'form-control col-2 ml-1' %>
+          <%= f.text_field :family_name_kana, class: 'form-control col-2',style: 'min-width: 185px;' %>
+          <%= f.text_field :first_name_kana, class: 'form-control col-2 ml-1' ,style: 'min-width: 185px;'%>
         </div>
 
         <div class='row form-group'>
           <label class="col-2">郵便番号</label>
-          <%= f.text_field :post_code, class: 'form-control col-2' %>
+          <%= f.text_field :post_code, class: 'form-control col-2',style: 'min-width: 185px;' %>
         </div>
 
         <div class='row form-group'>
           <label class="col-2">住所</label>
-          <%= f.text_field :address, class: 'form-control col-5' %>
+          <%= f.text_field :address, class: 'form-control col-5',style: 'min-width: 500px;' %>
         </div>
 
         <div class='row form-group'>
           <label class="col-2">電話番号</label>
-          <%= f.text_field :tell_number, class: 'form-control col-2' %>
+          <%= f.text_field :tell_number, class: 'form-control col-2',style: 'min-width: 185px;' %>
         </div>
 
         <div class='row form-group'>
           <label class="col-2">メールアドレス</label>
-          <%= f.text_field :email, class: 'form-control col-2' %>
+          <%= f.text_field :email, class: 'form-control col-2',style: 'min-width: 185px;' %>
         </div>
 
         <div class='row form-group'>
@@ -46,5 +46,5 @@
           <%= link_to "退会する", customers_unsubscribe_path , class:"btn btn-danger ml-3" %>
         </div>
         <% end %>
-    
+
 </div>

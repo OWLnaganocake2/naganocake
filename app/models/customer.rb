@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :family_name_kana, presence: true
   validates :first_name_kana, presence: true
-  validates :post_code, presence: true
+  validates :post_code, length: {is: 7}, numericality: { only_integer: true }, presence: true
   validates :address, presence: true
   validates :tell_number, presence: true
   validates :email, presence: true
