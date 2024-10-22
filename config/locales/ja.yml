@@ -17,6 +17,11 @@ ja:
         in_production: "製作中"
         production_completed: "製作完了"
   activerecord:
+    attributes:
+      address:
+        post_code: "郵便番号"
+        address: "住所"
+        name: "宛名"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
