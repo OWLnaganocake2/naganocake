@@ -35,7 +35,7 @@
     <table class="table">
       <tr>
         <th class='info'>配送料</th>
-        <td><%= params[:order][:shipping_fee].to_s %></td> 
+        <td><%= params[:order][:shipping_fee].to_s %></td>
       </tr>
       <tr>
         <th class="info">商品合計</th>
@@ -56,7 +56,7 @@
       <tr>
         <th class="info">お届け先</th>
         <td>
-          <%= @post_code %><%= @address %><br>
+          〒<%= @post_code %> <%= @address %><br>
           <%= @name  %>
         </td>
       </tr>

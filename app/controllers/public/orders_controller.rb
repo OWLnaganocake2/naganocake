@@ -81,9 +81,9 @@ class Public::OrdersController < ApplicationController
             @payment_method = "銀行振込"
         end
 
-        
+
         destination = params[:order][:a_method].to_i
-        
+
         if destination == 0
 
 
@@ -94,7 +94,7 @@ class Public::OrdersController < ApplicationController
         # 登録済住所が選択された時
         elsif destination == 1
 
-            address = Address.find(params[:address_for_order])
+            address = Address.find(params[:order][:address_id])
             @post_code = address.post_code
             @address = address.address
             @name = address.name
