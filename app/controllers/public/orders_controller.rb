@@ -23,7 +23,7 @@ class Public::OrdersController < ApplicationController
             sum += (cart_item.item.price * 1.1).floor * cart_item.amount
         end
 
-    
+
         session[:order][:total_price] = sum + session[:order][:shipping_fee]
         session[:order][:status] = 0
         session[:order][:customer_id] = current_customer.id
@@ -80,10 +80,12 @@ class Public::OrdersController < ApplicationController
         elsif params[:order][:payment_method] == "1"
             @payment_method = "銀行振込"
         end
+
         
         destination = params[:order][:a_method].to_i
         
         if destination == 0
+
 
             @post_code = current_customer.post_code
             @address = current_customer.address
@@ -104,8 +106,8 @@ class Public::OrdersController < ApplicationController
             @name = params[:order][:name]
 
         end
-        
-        
+
+
     end
 
     def thanks
