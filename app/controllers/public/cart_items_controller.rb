@@ -27,7 +27,7 @@ class Public::CartItemsController < ApplicationController
     def destroy
         cart_item = CartItem.find(params[:id])
         cart_item.destroy
-        @cart_items = CartItem.all
+        @cart_items = current_customer.cart_items.all
         render 'index'
     end
 
