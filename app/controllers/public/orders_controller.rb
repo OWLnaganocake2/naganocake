@@ -12,7 +12,7 @@ class Public::OrdersController < ApplicationController
     def new
         @order = Order.new
         @customer = current_customer
-        # @addresses = Address.where(customer_id: current_customer.id)
+        @addresses = current_customer.addresses
          sum = 0
          cart_items = current_customer.cart_items
         cart_items.each do |cart_item|
@@ -49,9 +49,9 @@ class Public::OrdersController < ApplicationController
             @payment_method = "銀行振込"
         end
 
-        
+
         destination = params[:order][:a_method].to_i
-        
+
         if destination == 0
 
 
@@ -62,13 +62,19 @@ class Public::OrdersController < ApplicationController
         # 登録済住所が選択された時
         elsif destination == 1
 
-            address = Address.find(params[:address_for_order])
-            @post_code = address.post_code
-            @address = address.address
-            @name = address.name
+            selected_address = current_customer.addresses.find_by(id: params[:order][:address_id])
+              if selected_address
+                @post_code = selected_address.post_code
+                @address = selected_address.address
+                @name = selected_address.name
+              else
+                flash.now[:alert] = '選択された住所が見つかりません。'
+                render :new
+              end
 
         # 新しいお届け先が選択された時
         elsif destination == 2
+
             @post_code = params[:order][:post_code]
             @address = params[:order][:address]
             @name = params[:order][:name]

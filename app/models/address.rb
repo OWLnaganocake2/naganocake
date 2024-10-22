@@ -8,4 +8,8 @@ class Address < ApplicationRecord
   def address_display #カリキュラム通りの記述
     '〒' + post_code + ' ' + address + ' ' + name
   end
+
+  def full_address
+    "#{post_code} #{address} #{name}"
+  end
 end

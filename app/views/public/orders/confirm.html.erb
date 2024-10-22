@@ -31,6 +31,7 @@
       </tbody>
     </table>
   </div>
+
   <%= form_with(model: @order, url: orders_path, local: true) do |f| %>
     <div class="col-xs-3 billing">
       <table class="table">
@@ -68,6 +69,3 @@
   <%= f.submit "購入を確定する", class: 'btn btn-primary' %>
   <% end %>
 </div>
- 
-   
-   
