@@ -1,4 +1,14 @@
 class Public::OrdersController < ApplicationController
+    def index
+        @orders = current_customer.orders
+    end
+
+    def show
+        @order = Order.find(params[:id])
+        @order_details = @order.order_details
+    end
+    
+    
     def new
         @order = Order.new
         @customer = current_customer
@@ -13,58 +23,16 @@ class Public::OrdersController < ApplicationController
 
     def create
         customer = current_customer
-
-        session[:order] = Order.new
-
-        cart_items = current_customer.cart_items
-
-        sum = 0
-        cart_items.each do |cart_item|
-            sum += (cart_item.item.price * 1.1).floor * cart_item.amount
-        end
-
-
-        session[:order][:total_price] = sum + session[:order][:shipping_fee]
-        session[:order][:status] = 0
-        session[:order][:customer_id] = current_customer.id
-        # ラジオボタンで選択された支払方法のenum番号を渡している
-		session[:order][:payment_method] = params[:payment_method].to_i
-
-        # ラジオボタンで選択されたお届け先によって条件分岐
-        destination = params[:a_method].to_i
-
-        # ご自身の住所が選択された時
-        if destination == 0
-
-            params[:order][:post_code] = customer.post_code
-            params[:order][:address] = customer.address
-            params[:order][:name] = customer.family_name + customer.first_name
-
-        # 登録済住所が選択された時
-        elsif destination == 1
-
-            address = Address.find(params[:address_for_order])
-            params[:order][:post_code] = address.post_code
-            params[:order][:address] = address.address
-            params[:order][:name] = address.name
-
-        # 新しいお届け先が選択された時
-        elsif destination == 2
-
-            params[:new_address] = 2
-            params[:order][:post_code] = params[:post_code]
-            params[:order][:address] = params[:address]
-            params[:order][:name] = params[:name]
-
-        end
-
-        # お届け先情報に漏れがあればリダイレクト
-        if session[:order][:post_code].presence && session[:order][:address].presence && session[:order][:name].presence
-            redirect_to
-        else
-            redirect_to new_order_path
-        end
+        @order = Order.new
+      if @order.save
+        flash[:notice] = "注文情報を作成しました！"
+         redirect_to orders_thanks_path
+      else
+        flash[:notice] = "注文情報の作成に失敗しました！" 
+        render order_new_path
+      end
     end
+
 
     def confirm
         @cart_items = current_customer.cart_items
@@ -104,10 +72,7 @@ class Public::OrdersController < ApplicationController
             @post_code = params[:order][:post_code]
             @address = params[:order][:address]
             @name = params[:order][:name]
-
-        end
-
-
+          end
     end
 
     def thanks
@@ -137,12 +102,5 @@ class Public::OrdersController < ApplicationController
 
     end
 
-    def index
-        @orders = current_customer.orders
-    end
-
-    def show
-        @order = Order.find(params[:id])
-        @order_details = @order.order_details
-    end
+   
 end
