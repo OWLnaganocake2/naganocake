@@ -17,7 +17,7 @@
 
             <span>　　　</span><%= f.radio_button :a_method, 1 %>
 			<%= f.label :登録済住所から選択 %><br>
-			<span>　　　</span><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %><br>
+			<span>　　　</span><%= f.collection_select :address_id, @addresses, :id, :full_address, prompt: "住所を選択" %><br>
 
 
 			<span>　　　</span><%= f.radio_button :a_method, 2 %>
@@ -42,7 +42,7 @@
 			</div>
 
 	   		<%= f.submit "確認画面へ進む", class: 'btn btn-success' %>
-				<%= f.hidden_field :shipping_fee, value: 800 %> 
+				<%= f.hidden_field :shipping_fee, value: 800 %>
 
 		  <% end %>
 
