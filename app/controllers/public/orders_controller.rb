@@ -12,30 +12,32 @@ class Public::OrdersController < ApplicationController
     def new
         @order = Order.new
         @customer = current_customer
-        @addresses = current_customer.addresses
          sum = 0
          cart_items = current_customer.cart_items
         cart_items.each do |cart_item|
             sum += (cart_item.item.price * 1.1).floor * cart_item.amount
         end
         @total_price = sum
+        @addresses = current_customer.addresses
     end
 
     def create
         @order = Order.new(order_params)
-        @order.status = 0
+
         @order.customer_id = current_customer.id
-    if @order.save!
+      if @order.save!
         flash[:notice] = "注文情報を作成しました！"
-        redirect_to orders_thanks_path
-    else
-        flash[:notice] = "注文情報の作成に失敗しました！"
+        CartItem.destroy_all
+         redirect_to orders_thanks_path
+      else
+        flash[:notice] = "注文情報の作成に失敗しました！" 
         redirect_to new_order_path
-    end
-    end
+      end
+
 
 
     def confirm
+
         @cart_items = current_customer.cart_items
         sum = 0
          cart_items = current_customer.cart_items
@@ -44,15 +46,16 @@ class Public::OrdersController < ApplicationController
         end
         @total_price = sum
         @shipping_fee = 800
+      
         if params[:order][:payment_method] == "0"
             @payment_method = "クレジットカード"
         elsif params[:order][:payment_method] == "1"
             @payment_method = "銀行振込"
         end
-
-
+        @order = Order.new(order_params) 
+        
         destination = params[:order][:a_method].to_i
-
+        
         if destination == 0
 
 
@@ -63,51 +66,40 @@ class Public::OrdersController < ApplicationController
         # 登録済住所が選択された時
         elsif destination == 1
 
-            selected_address = current_customer.addresses.find_by(id: params[:order][:address_id])
-              if selected_address
-                @post_code = selected_address.post_code
-                @address = selected_address.address
-                @name = selected_address.name
-              else
-                flash.now[:alert] = '選択された住所が見つかりません。'
-                render :new
-              end
+            address = Address.find(params[:address_for_order])
+            @post_code = address.post_code
+            @address = address.address
+            @name = address.name
 
         # 新しいお届け先が選択された時
         elsif destination == 2
-
             @post_code = params[:order][:post_code]
             @address = params[:order][:address]
             @name = params[:order][:name]
-         end
+
+        end
+
     end
 
     def thanks
-        order = Order.new(session[:order])
-        order.save
+        # order = Order.new(params[:order])
+        # order.save
 
-        if session[:new_address]
-            address = current_customer.addresses.new
-            address.post_code = order.post_code
-            address.address = order.address
-            address.name = order.name
-            address.save
-            session[:new_address] = nil
-        end
-
-        cart_items = current_customer.cart_items
-        cart_items.each do |cart_item|
-            order_detail = OrderDetail.new
-            order_detail.order_id = order_id
-            order_detail.item_id = cart_item.item_id
-            order_detail.amount = cart_item.amount
-            order_detail.making_status = 0
-            order_detail.price = cart_item.item.add_tax_sales_price
-            order_detail.save
-        end
-
-
+        # cart_items = current_customer.cart_items
+        # cart_items.each do |cart_item|
+        #     order_detail = OrderDetail.new
+        #     order_detail.order_id = order_id
+        #     order_detail.item_id = cart_item.item_id
+        #     order_detail.amount = cart_item.amount
+        #     order_detail.making_status = 0
+        #     order_detail.price = cart_item.item.add_tax_sales_price
+        #     order_detail.save
+        # end
     end
+    private
+	def order_params
+		params.require(:order).permit(:status,:total_price,:payment_method,:shipping_fee,:post_code,:address,:name,:customer_id)
+	end
 
    
 end

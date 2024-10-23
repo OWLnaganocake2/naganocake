@@ -1,3 +1,4 @@
+
 <div class='container my-5'>
 
   <h4 class='row mb-5'>
@@ -11,10 +12,10 @@
 
       <h5 class="font-weight-bold">支払方法</h5>
       <p class="ml-5">
-        <%= f.radio_button :payment_method, 0, checked: "checked" %>
+        <%= f.radio_button :payment_method, "credit_card", checked: "checked" %>
         <%= f.label :payment_method, "クレジットカード" %>
         <br>
-        <%= f.radio_button :payment_method, 1 %>
+        <%= f.radio_button :payment_method, "transfar" %>
         <%= f.label :payment_method, "銀行振込" %>
       </p>
 
@@ -22,6 +23,7 @@
       <p class="ml-5">
         <%= f.radio_button :a_method, 0, checked: "checked" %>
         <%= f.label :ご自身の住所 %>
+
         <br>
         <span>　　</span>〒<%= @customer.post_code %> <%= @customer.address %><br>
         <span>　　</span><%= @customer.family_name %> <%= @customer.first_name %><br>

@@ -10,4 +10,11 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
     @genres = Genre.all
   end
+  
+      private
+
+  def item_params
+    params.require(:item).permit(:name,:genre_id,:item_image, :item_details, :price, :is_active)
+  end
+  
 end
