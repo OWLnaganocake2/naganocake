@@ -1,4 +1,7 @@
   <div class='row'>
+    <div id="error">
+      <%= render "layouts/errors" %>
+    </div>
     <%= form_with model: @customer, url: admin_customer_path do |f| %>
 
       <h2><%= @customer.family_name + @customer.first_name %>さんの会員情報編集</h2>

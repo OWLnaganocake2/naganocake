@@ -26,10 +26,11 @@ class Admin::OrdersController < ApplicationController
 		redirect_to admins_order_path(order.id)
 	end
 
-  private
+      private
 	def order_params
-		params.require(:order).permit(:status)
+		params.require(:order).permit(:status,:total_price,:payment_method,:shipping_fee,:post_code,:address,:name,:customer_id)
 	end
+
 
 
 end

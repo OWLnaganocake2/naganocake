@@ -13,5 +13,16 @@ class Admin::CustomersController < ApplicationController
       @customer = Customer.find(params[:id])
     end
     
-    
+    def customer_params
+    params.require(:customer).permit(:family_name,
+                                     :first_name,
+                                     :family_name_kana,
+                                     :first_name_kana,
+                                     :post_code,
+                                     :address,
+                                     :tell_number,
+                                     :email,
+                                     :is_active
+                                     )
+  end
 end

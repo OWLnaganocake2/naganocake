@@ -1,4 +1,7 @@
 <div class="row">
+        <div id="error">
+      <%= render "layouts/errors" , obj: @order%>
+    </div>
   <h3><strong>注文情報詳細</strong></h3>
   <div class="col-xs-9">
     <table class="table">
@@ -19,7 +22,7 @@
             </td>
             <td>
               <%= cart_item.item.add_tax_sales_price.to_s(:dalimited, delimiter: ',') %>
-            </td>
+            </td>　
             <td>
               <%= cart_item.amount %>
             </td>
@@ -60,11 +63,20 @@
           <td>
             <%= @post_code %><%= @address %><br>
             <%= @name  %>
+          
           </td>
         </tr>
       </table>
-    <%= f.hidden_field :customer_id, value: current_customer %> 
-    <%= f.hidden_field :status, value: 0 %>
+    <%#= f.hidden_field :customer_id, value: current_customer.id %> 
+    <%= f.hidden_field :status, value: "waiting_payment" %>
+    <%= f.hidden_field :post_code, value: @post_code %>
+    <%= f.hidden_field :address, value: @address %>
+    <%= f.hidden_field :name, value: @name %>
+    <%= f.hidden_field :payment_method, value: @order.payment_method %>
+    <%= f.hidden_field :total_price, value: @total_price + @shipping_fee %>
+    <%= f.hidden_field :shipping_fee, value: 800 %>
+    
+    
    </div>
   <%= f.submit "購入を確定する", class: 'btn btn-primary' %>
   <% end %>
