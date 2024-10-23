@@ -40,9 +40,9 @@ Rails.application.routes.draw do
   #管理者側
   namespace :admin do
     root to: 'pages#home'
-    resources :items, only: [:index,:new,:edit,:show,:create,:update]
-    resources :genres, only: [:index,:create,:edit,:update]
-    resources :customers, only: [:index,:show,:edit,:update] do
+    resources :items, only: [:index,:new,:edit,:show,:create,:update,:destroy]
+    resources :genres, only: [:index,:create,:edit,:update,:destroy]
+    resources :customers, only: [:index,:show,:edit,:update,:destroy] do
      resources :order, only: [:index]
     end
     resources :orders, only: [:show,:update]

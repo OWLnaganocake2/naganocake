@@ -6,7 +6,9 @@
     <%= form_with(model: @genre, url: admin_genre_path) do |f| %>    
           <%= f.label :ジャンル名 %>
           <%= f.text_field :name, class: "col-md-4" %>
-          <%= f.submit "変更を保存" ,class: "btn btn-primary" %>
+          <%= f.submit "変更を保存" ,class: "btn btn-success" %>
+          <%= link_to "ジャンルの削除", admin_genre_path(@genre.id), method: :delete,  class: "btn btn-primary col-xs-2 ml-5","data-confirm" => "本当に削除しますか？" %>
+
         </div>
     <% end %>
   </div>

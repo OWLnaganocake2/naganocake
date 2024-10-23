@@ -1,6 +1,6 @@
   <div class='row'>
     <div id="error">
-      <%= render "layouts/errors" %>
+      <%= render "layouts/errors",obj: @customer %>
     </div>
     <%= form_with model: @customer, url: admin_customer_path do |f| %>
 
@@ -48,6 +48,9 @@
           <td colspan="2" class="text-center">
             <%= f.submit "変更を保存", class: "btn btn-success" %>
           </td>
+          <td class="col-xs-5 ml-5">
+            <%= link_to "会員の物理削除", admin_customer_path(@customer.id), method: :delete,  class: "btn btn-primary","data-confirm" => "本当に削除しますか？" %>
+          </div>
         </tr>
       </table>
  
