@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+@import 'bootstrap';
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  margin: 0;
+}
+
+header {
+  background-image: url('mokumetyou.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+main {
+
+}
+
+footer {
+  background-image: url('mokumetyou.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: auto;
+  bottom: 0;
+  width: 100%;
+}
