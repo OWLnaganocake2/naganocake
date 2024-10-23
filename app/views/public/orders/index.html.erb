@@ -1,35 +1,42 @@
-<!--注文履歴一覧 -->
-<div class="row">
-	<div class="col-xs-12">
-		<h3><strong>注文履歴一覧</strong></h3>
-		<table class="table table-bordered table-condensed">
-		<tr>
-			<th class="col-xs-2">注文日</th>
-			<th class="col-xs-3">配送先</th>
-			<th class="col-xs-2">注文商品</th>
-			<th class="col-xs-1">支払金額</th>
-			<th class="col-xs-2">ステータス</th>
-			<th class="col-xs-2">注文詳細</th>
-		</tr>
-		<% @orders.each do |order|%>
-		<tr>
-			<td class="col-xs-2"><%= order.created_at.strftime('%Y/%m/%d') %></td>
-			<td class="col-xs-3">
-			  <%= order.post_code %><br>
-				<%= order.address %><br>
-				<%= order.name %>
-			</td>
-			<td class="col-xs-2">
-				<% order.order_details.each do |order_detail| %>
-				  <%= order_detail.item.name %><br>
-			  <% end %>
-			</td>
-			<td class="col-xs-1"><%= order.total_price.to_s(:delimited, delimiter: ',') %>円</td>
-			<td class="col-xs-2"><%= order.status %></td>
-			<td><%= link_to "表示する", order_path(order), class: "btn btn-primary" %></td>
-		</tr>
+<div class="container my-5">
+  <h4 class="row mb-5">
+    <div>　　　　　</div><span class="heading-title">注文履歴一覧</span>
+  </h4>
+
+	<div class='row'>
+  <table class='table table-bordered'>
+  	<thead>
+			<tr class='table-secondary'>
+				<th class="col-2">注文日</th>
+				<th class="col-3">配送先</th>
+				<th class="col-2">注文商品</th>
+				<th class="col-1">支払金額</th>
+				<th class="col-2">ステータス</th>
+				<th class="col-2">注文詳細</th>
+			</tr>
+	  </thead>
+	  <tbody>
+			<% @orders.each do |order|%>
+				<tr>
+					<td class='text-align align-middle'><%= order.created_at.strftime('%Y/%m/%d') %></td>
+					<td class='align-middle'>
+					  〒<%= order.post_code %><br>
+						<%= order.address %><br>
+						<%= order.name %>
+					</td>
+					<td class='align-middle'>
+						<% order.order_details.each do |order_detail| %>
+						  <%= order_detail.item.name %><br>
+					  <% end %>
+					</td>
+					<td class='align-middle'><%= order.total_price.to_s(:delimited, delimiter: ',') %>円</td>
+					<td class='align-middle'><%= order.status %></td>
+					<td class='align-middle'><%= link_to "表示する", order_path(order), class: "btn btn-primary" %></td>
+				</tr>
+		</tbody>
 		<% end %>
 	</table>
 	</div>
+
 </div>
 
