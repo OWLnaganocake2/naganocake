@@ -1,4 +1,8 @@
 <div class="row">
+  <div id="error">
+      <%= render "layouts/errors" , obj: @order%>
+      <%= @flash %>
+    </div>
     <div class="col-xs-12">
       <div>
         <strong class="information-link"><h3>ショッピングカート</h3></strong>
@@ -18,31 +22,30 @@
           <% @cart_items.each do |cart_item| %>
           <tr>
             <td class="col-xs-3"><%= image_tag cart_item.item.get_item_image(60,50)|| "no_image.jpg" %><%= cart_item.item.name %></td>
-
-            </td>
-            <td class="col-xs-2">¥<%= (cart_item.item.add_tax_sales_price.to_s(:delimited, delimiter: ',') %></td>
+            <td class="col-xs-2">¥<%= (cart_item.item.add_tax_sales_price).to_s(:delimited, delimiter: ',') %></td>
             <td class="col-xs-1">
-              <%= form_with(model: cart_item, url: customers_cart_item_path(cart_item), local: true) do |f| %>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true, method: :patch do |f| %>
              <p>
-              <%= f.select :amount, (1..9).map { |n| [n.to_s, n] }, { prompt: "選択してください" } %>
+              <%= f.select :amount, (1..9).map { |n| [n.to_s, n] }, prompt: "選択してください" %>
               <%= f.submit "変更", class: "btn btn-primary" %>
             </p>
-            <% end %>>
-            <td class="col-xs-1">
-                <%= ((cart_item.item..add_tax_sales_price * cart_item.amount ).floor).to_s(:delimited, delimiter: ',') %>
+              <% end %>
             </td>
             <td class="col-xs-1">
-                <%= link_to "削除する", customers_cart_item_path(cart_item.id), method: :DELETE, class: "btn btn-danger" %>
+                <%= ((cart_item.item.add_tax_sales_price * cart_item.amount ).floor).to_s(:delimited, delimiter: ',') %>
+            </td>
+            <td class="col-xs-1">
+                <%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
             </td>
           </tr>
           <% end %>
          </tbody>
-        
+
         <div class="row">
            <div class="col-xs-2 text-center mt-3">
              <%= link_to "買い物を続ける", items_path, class: "btn btn-secondary ms-1" %>
            </div>
-         
+
            <table class="tcol-xs-4 able table-hover table-bordered col-xs-10" >
             <tr>
               <td  class="info">合計金額<td>
@@ -50,15 +53,15 @@
             </tr>
            </table>
         </div>
-        
+
         <div class="row">
           <div class="text-center mt-3">
-            <%= link_to "入力情報に進む", checkout_path, class: "btn btn-success" %>
+            <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success" %>
           </div>
         </div>
-        
 
-         
+
+
         </table>
     </div>
 </div>

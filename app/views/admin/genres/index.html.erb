@@ -5,8 +5,7 @@
             <%= form_with(model: @genre, url: admin_genres_path) do |f| %>
               <%= f.label :ジャンル名 %>
               <%= f.text_field :name, class: "col-md-4" %>
-          
-             <%= f.submit "新規登録" ,class: "btn btn-primary" %>
+             <%= f.submit "新規登録" ,class: "btn btn-success" %>
              <% end %>  
      <table class="table">
        <thead>
@@ -18,7 +17,7 @@
          <% @genres.each do |genre| %>
          <tr>
            <td><%= genre.name %></td>
-           <td><%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-primary" %></td>
+           <td><%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-success" %></td>
          </tr>
          <% end %>>
        </thead>

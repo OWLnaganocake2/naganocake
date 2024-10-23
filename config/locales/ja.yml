@@ -10,7 +10,27 @@ ja:
         in_production: "製作中"
         preparing_for_shipment: "発送準備中"
         delivered: "発送済み"
+    order_detail:
+     making_status:
+        unable_to_start: "着手不可"
+        waiting_for_production: "製作待ち"
+        in_production: "製作中"
+        production_completed: "製作完了"
   activerecord:
+    attributes:
+      address:
+        post_code: "郵便番号"
+        address: "住所"
+        name: "宛名"
+      customer:
+        family_name: "氏名(姓)"
+        first_name: "氏名(名)"
+        family_name_kana: "フリガナ(姓)"
+        first_name_kana: "フリガナ(名)"
+        email: "メールアドレス"
+        post_code: "郵便番号"
+        address: "住所"
+        tell_number: "電話番号"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

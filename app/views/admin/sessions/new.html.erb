@@ -1,27 +1,31 @@
-<div class="">
-<h2 class="col-md-3 bg-secondary text-center">管理者ログイン</h2>
-</div>
+<div class="container-fluid">
+  <div class="form-group row" style="padding:20px;">
+    <div class="col-6 offset-3" style="border-radius: 30px; background-color: lightblue; padding-top:5px;">
+      <h2 class="text-center text-white">管理者ログイン</h2>
+    </div>
+  </div>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="row col-md-6 d-flex justify-content-center">
-    <div class="col-md-6 mb-4 ml-4 text-left">
-    メールアドレス
+    <div class="form-group row">
+      <div class="col-2 offset-2">
+        メールアドレス
+      </div>
+      <div class="col-6" style="margin-bottom: 15px;">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "admin@example.jp", class: "w-100" %>
+      </div>
     </div>
-    <div class="col-md-4 mb-4 ml-4">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "admin@example.jp", class: 'fa' %>
-    </div>
-  </div>
 
-  <div class="row col-md-4 d-flex justify-content-center">
-    <div class="col-md-6 mb-4 ml-4 text-left">
-    パスワード
+  <div class="form-group row">
+      <div class="col-2 offset-2">
+        パスワード
+      </div>
+      <div class="col-6">
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "123456", class: "w-100" %>
+      </div>
     </div>
-    <div class="col-md-4 mb-4 ml-4">
-    <%= f.password_field :password, autocomplete: "current-password",  placeholder: "123456", class: 'form-control-lg' %>
-    </div>
-  </div>
-<div class="row">
-  <div class="d-flex justify-content-center col-md-3">
+
+    <div class="row" style="margin-bottom:50px;">
+      <div class="col-md-12 text-center">
     <%= f.submit "ログイン",class: "btn btn-primary" %>
   </div>
 </div>

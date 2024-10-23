@@ -1,52 +1,50 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h4 class="my-5">会員情報編集</h4>
-      <table class="table table-borderless">
-        <%= form_with model: @customer, url: customers_information_path, method: :patch do |f| %>
-        <tr>
-          <td>氏名</td>
-          <td><%= f.text_field :last_name %></td>
-          <td><%= f.text_field :first_name %></td>
-        </tr>
+<div class='container my-5'>
 
-        <tr>
-          <td>フリガナ</td>
-          <td><%= f.text_field :last_name_kana %></td>
-          <td><%= f.text_field :first_name_kana %></td>
-        </tr>
+  <h4 class='row mb-5'>
+    <div>　　　　　</div><span class='heading-title'>会員情報編集</span>
+  </h4>
 
-        <tr>
-          <td>郵便番号</td>
-          <td><%= f.text_field :postcode %></td>
-          <td></td>
-        </tr>
+  <%= render 'layouts/errors', obj: @customer %>
 
-        <tr>
-          <td>住所</td>
-          <td><%= f.text_field :address %></td>
-          <td></td>
-        </tr>
+  <%= form_with model: @customer, url: customers_information_path, method: :patch do |f| %>
+        <div class='row form-group'>
+          <label class="col-2">氏名</label>
+          <%= f.text_field :family_name, class: 'form-control col-2',style: 'min-width: 185px;' %>
+          <%= f.text_field :first_name, class: 'form-control col-2 ml-1',style: 'min-width: 185px;' %>
+        </div>
 
-        <tr>
-          <td>電話番号</td>
-          <td><%= f.text_field :phone_number %></td>
-          <td></td>
-        </tr>
+        <div class='row form-group'>
+          <label class="col-2">フリガナ</label>
+          <%= f.text_field :family_name_kana, class: 'form-control col-2',style: 'min-width: 185px;' %>
+          <%= f.text_field :first_name_kana, class: 'form-control col-2 ml-1' ,style: 'min-width: 185px;'%>
+        </div>
 
-        <tr>
-          <td>メールアドレス</td>
-          <td><%= f.text_field :email %></td>
-          <td></td>
-        </tr>
+        <div class='row form-group'>
+          <label class="col-2">郵便番号</label>
+          <%= f.text_field :post_code, class: 'form-control col-2',style: 'min-width: 185px;' %>
+        </div>
 
-        <tr>
-          <td></td>
-          <td><%= f.submit "編集内容を保存", class:"btn btn-success" %></td>
-          <td><%= link_to "退会する", customers_unsubscribe_path , class:"btn btn-danger" %></td>
-        </tr>
+        <div class='row form-group'>
+          <label class="col-2">住所</label>
+          <%= f.text_field :address, class: 'form-control col-5',style: 'min-width: 500px;' %>
+        </div>
+
+        <div class='row form-group'>
+          <label class="col-2">電話番号</label>
+          <%= f.text_field :tell_number, class: 'form-control col-2',style: 'min-width: 185px;' %>
+        </div>
+
+        <div class='row form-group'>
+          <label class="col-2">メールアドレス</label>
+          <%= f.text_field :email, class: 'form-control col-2',style: 'min-width: 185px;' %>
+        </div>
+
+        <div class='row form-group'>
+          <div class="col-2"></div>
+          <%= f.submit "編集内容を保存", class:"col-2 btn btn-success" %>
+          <div class="col-1"></div>
+          <%= link_to "退会する", customers_unsubscribe_path , class:"btn btn-danger ml-3" %>
+        </div>
         <% end %>
-      </table>
-    </div>
-  </div>
+
 </div>

@@ -1,0 +1,64 @@
+
+<div class='container my-5'>
+
+  <h4 class='row mb-5'>
+    <div>　　　　　</div><span class='heading-title'>注文情報入力</span>
+  </h4>
+
+  <div class="row">
+    <div class="col">
+
+    <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
+
+      <h5 class="font-weight-bold">支払方法</h5>
+      <p class="ml-5">
+        <%= f.radio_button :payment_method, "credit_card", checked: "checked" %>
+        <%= f.label :payment_method, "クレジットカード" %>
+        <br>
+        <%= f.radio_button :payment_method, "transfar" %>
+        <%= f.label :payment_method, "銀行振込" %>
+      </p>
+
+      <h5 class="font-weight-bold">お届け先</h5>
+      <p class="ml-5">
+        <%= f.radio_button :a_method, 0, checked: "checked" %>
+        <%= f.label :ご自身の住所 %>
+
+        <br>
+        <span>　　</span>〒<%= @customer.post_code %> <%= @customer.address %><br>
+        <span>　　</span><%= @customer.family_name %> <%= @customer.first_name %><br>
+
+        <br>
+        <%= f.radio_button :a_method, 1 %>
+        <%= f.label :登録済住所から選択 %>
+        <br>
+        <span>　　</span><%= f.collection_select :address_id, @addresses, :id, :full_address, prompt: "住所を選択" %><br>
+
+        <br>
+        <%= f.radio_button :a_method, 2 %>
+        <%= f.label :新しいお届け先 %>
+        <table>
+          <tr>
+            <td class="col-3">　　　　<%= f.label :"郵便番号(ハイフンなし)" %></td>
+            <td class="col-9"><%= f.text_field :post_code, :placeholder => "0000000" %></td>
+          </tr>
+          <tr>
+            <td class="col-3">　　　　<%= f.label :"住所" %></td>
+            <td class="col-9"><%= f.text_field :address, :placeholder => "東京都渋谷区代々木神園町0-0", style: "min-width: 500px;" %></td>
+          </tr>
+          <tr>
+            <td class="col-3">　　　　<%= f.label :"宛名" %></td>
+            <td class="col-9"><%= f.text_field :name, :placeholder => "令和道子" %></td>
+          </tr>
+        </table>
+      </p>
+
+        <div class="row justify-content-center">
+          <%= f.submit "確認画面へ進む" , class:"btn btn-primary", style: "min-width: 185px;" %>
+        </div>
+        <%= f.hidden_field :shipping_fee, value: 800 %>
+      <% end %>
+    </div>
+  </div>
+
+</div>

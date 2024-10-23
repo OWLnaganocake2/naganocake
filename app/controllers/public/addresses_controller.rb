@@ -1,8 +1,7 @@
 class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
-    @addresses = Address.all #顧客新規登録ができたらインスタンス変更
-    # @addresses = current_customer.addresses 
+    @addresses = current_customer.addresses
   end
 
   def create
@@ -12,8 +11,8 @@ class Public::AddressesController < ApplicationController
       flash[:notice] = "登録しました。"
       redirect_to addresses_path
     else
-      @address = Address.new
       @addresses = current_customer.addresses
+      flash.now[:alert] = '配送先の登録に失敗しました。'
       render 'index'
     end
   end
@@ -37,6 +36,6 @@ class Public::AddressesController < ApplicationController
   private
 
   def address_params
-    params.require(:address).permit(:customer_id, :name, :post_code, :address)
+    params.require(:address).permit(:name, :post_code, :address)
   end
 end

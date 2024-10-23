@@ -14,18 +14,13 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe' => 'customers#unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw'
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
-
-    
-
-  #   resources :customers do
-  #   resources :cart_items, only: [:update,:destroy,:index,:create] 
-  # end
-    delete '/cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all_cart_items'
-
-    resources :cart_items, only: [:index, :update, :destroy, :create]
-    resources :orders, only: [:new, :create, :index, :show]
     get 'orders/thanks' => 'orders#thanks'
     post 'orders/confirm' => 'orders#confirm'
+    resources :orders, only: [:new, :create, :index, :show] 
+ 
+    
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all_cart_items'
+    resources :cart_items, only: [:index, :update, :destroy, :create]
   end
 
   namespace :public do
@@ -45,9 +40,11 @@ Rails.application.routes.draw do
   #管理者側
   namespace :admin do
     root to: 'pages#home'
-    resources :items, only: [:index,:new,:edit,:show,:create,:update]
-    resources :genres, only: [:index,:create,:edit,:update]
-    resources :customers, only: [:index,:show,:edit,:update]
+    resources :items, only: [:index,:new,:edit,:show,:create,:update,:destroy]
+    resources :genres, only: [:index,:create,:edit,:update,:destroy]
+    resources :customers, only: [:index,:show,:edit,:update,:destroy] do
+     resources :order, only: [:index]
+    end
     resources :orders, only: [:show,:update]
     resources :order_details, only: [:update]
   end

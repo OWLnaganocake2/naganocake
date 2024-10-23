@@ -23,11 +23,10 @@
 #                 is_deleted:"false"
 #                 )
 
-# Genre.create!(name:"ホールケーキ")
-# Genre.create!(name:"ポーション")
+# Genre.create!(name:"ケーキ")
+# Genre.create!(name:"プリン")
 # Genre.create!(name:"焼き菓子")
-# Genre.create!(name:"ギフト")
-# Genre.create!(name:"ブレッド")
+# Genre.create!(name:"キャンディ")
 
 # Item.create!(genre_id: "1",
 #             name: "ショートケーキ",
