@@ -1,0 +1,32 @@
+[1mdiff --git a/app/controllers/admin/order_details_controller.rb b/app/controllers/admin/order_details_controller.rb[m
+[1mindex 217ed11..dff0c3f 100644[m
+[1m--- a/app/controllers/admin/order_details_controller.rb[m
+[1m+++ b/app/controllers/admin/order_details_controller.rb[m
+[36m@@ -1,2 +1,25 @@[m
+ class Admin::OrderDetailsController < ApplicationController[m
+[31m-end[m
+[32m+[m[32mbefore_action :authenticate_admin![m
+[32m+[m
+[32m+[m	[32mdef update[m
+[32m+[m		[32morder_detail =[m
+[32m+[m		[32mOrderDetail.find(params[:id])[m
+[32m+[m		[32morder_detail.update(order_detail_params)[m
+[32m+[m
+[32m+[m		[32mcase order_detail.making_status[m
+[32m+[m		[32m when "製作中"[m
+[32m+[m				[32morder_detail.order.update(order_status: "製作中")[m
+[32m+[m		[32m when "製作完了"[m
+[32m+[m			[32mif order_detail.order.order_details.all?{|order_detail| order_detail.making_status == "製作完了"}[m
+[32m+[m				[32morder_detail.order.update(order_status: "発送準備中")[m
+[32m+[m			[32mend[m
+[32m+[m		[32mend[m
+[32m+[m		[32mredirect_to admins_order_path(order_detail.order.id)[m
+[32m+[m	[32mend[m
+[32m+[m
+[32m+[m	[32mprivate[m
+[32m+[m[32m   def order_detail_params[m
+[32m+[m		[32m params.require(:order_detail).permit(:making_status)[m
+[32m+[m	[32m end[m
+[32m+[m
+[32m+[m[32mend[m
+\ No newline at end of file[m

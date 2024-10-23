@@ -6,4 +6,8 @@ class OrderDetail < ApplicationRecord
   validates :making_status, presence: true
   enum making_status: { unable_to_start: 0, waiting_for_production: 1, in_production: 2, production_completed: 3 }
   
+  def add_tax_sales_price
+    (self.price * 1.10).round
+  end
+  
 end
