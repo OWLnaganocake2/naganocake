@@ -7,8 +7,8 @@ class Public::OrdersController < ApplicationController
         @order = Order.find(params[:id])
         @order_details = @order.order_details
     end
-    
-    
+
+
     def new
         @order = Order.new
         @customer = current_customer
@@ -109,5 +109,5 @@ class Public::OrdersController < ApplicationController
 
     end
 
-   
+
 end
