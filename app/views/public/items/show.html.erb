@@ -26,7 +26,8 @@
         <p>(税込)</p>
       </div>
       <br>
-
+      
+      <% if customer_signed_in? %>
         <%= form_with model: @cart_item, local: true do |f| %>
           <%= f.hidden_field :item_id, value: @item.id %>
           <div class="row d-flex">
@@ -38,7 +39,7 @@
             </div>
         <% end %>
           </div>
-
+      <% end %>
       <% else %>
         <h4>この商品は<br>販売停止中です。</h4>
       <% end %>
