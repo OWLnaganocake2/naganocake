@@ -50,7 +50,6 @@ class Public::OrdersController < ApplicationController
 
 
     def confirm
-
         @cart_items = current_customer.cart_items
         sum = 0
          cart_items = current_customer.cart_items
@@ -60,9 +59,9 @@ class Public::OrdersController < ApplicationController
         @total_price = sum
         @shipping_fee = 800
       
-        if params[:order][:payment_method] == "0"
+        if params[:order][:payment_method] == "credit_card"
             @payment_method = "クレジットカード"
-        elsif params[:order][:payment_method] == "1"
+        elsif params[:order][:payment_method] == "transfer"
             @payment_method = "銀行振込"
         end
         @order = Order.new(order_params) 
