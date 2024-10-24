@@ -79,7 +79,7 @@ class Public::OrdersController < ApplicationController
         # 登録済住所が選択された時
         elsif destination == 1
 
-            address = Address.find(params[:address_for_order])
+            address = Address.find(params[:customer_id][:address_id])
             @post_code = address.post_code
             @address = address.address
             @name = address.name
