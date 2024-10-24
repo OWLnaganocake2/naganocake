@@ -111,11 +111,4 @@ class Public::OrdersController < ApplicationController
 		                              :customer_id
 		                              )
 	end
-
-   def cartitem_nill
-     cart_items = current_customer.cart_items
-     if cart_items.blank?
-      redirect_to cart_items_path
-     end
-   end
 end
