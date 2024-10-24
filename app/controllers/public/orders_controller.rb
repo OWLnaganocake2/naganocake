@@ -69,6 +69,8 @@ class Public::OrdersController < ApplicationController
         
         destination = params[:order][:a_method].to_i
         
+        
+        
         if destination == 0
 
 
