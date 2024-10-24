@@ -22,13 +22,13 @@
             <strong><%= cart_item.item.name %></strong>
           </td>
           <td class="align-middle">
-            <%= cart_item.item.add_tax_sales_price.to_s(:dalimited, delimiter: ',') %>
+            <%= cart_item.item.add_tax_sales_price.to_s(:delimited, delimiter: ',') %>
           </td>
           <td class="align-middle">
             <%= cart_item.amount %>
           </td>
           <td class="align-middle">
-            <%= (cart_item.item.add_tax_sales_price * cart_item.amount).to_s(:dalimited, delimiter: ',') %>
+            <%= (cart_item.item.add_tax_sales_price * cart_item.amount).to_s(:delimited, delimiter: ',') %>
           </td>
         </tr>
       <% end %>

@@ -1,33 +1,48 @@
-<div class="row">
-  <div class="col-xs-2">
-    <%= render 'public/items/sidebar', genres: @genres %>
-  </div>
 
-  <div class="col">
-    <%= image_tag @item.get_item_image(300,300) || "no_image.jpg", width: "60%" %>
-  </div>
 
-  <div class="col">
-    <h2><strong><%= @item.name %></strong></h2>
-    <h4><%= @item.item_details %></h4>
-    
-    <% if @item.is_active == true %>
-      <h3>¥ <%= @item.add_tax_sales_price.to_s(:dalimited) %> (税込)</h3>
-      
-      <div class="d-flex align-items-center">
+  <div class="row m-5">
+    <div class="col-3">
+      <%= render 'public/items/sidebar', genres: @genres %>
+    </div>
+
+    <div class="col-6 mt-5">
+      <div class="text-center">
+        <%= image_tag @item.get_item_image(300,300) || "no_image.jpg", width: "60%" %>
+      </div>
+    </div>
+
+    <div class="col-3 mt-5 ">
+      <h4 class="my-3">
+        <strong><%= @item.name %></strong>
+      </h4>
+      <h5 class="mb-3">
+        <%= @item.item_details %>
+      </h5>
+      <br>
+
+      <% if @item.is_active == true %>
+      <div class="row d-flex pl-3">
+        <h4>¥ <%= @item.add_tax_sales_price.to_s(:delimited) %></h4>
+        <p>(税込)</p>
+      </div>
+      <br>
+
         <%= form_with model: @cart_item, local: true do |f| %>
           <%= f.hidden_field :item_id, value: @item.id %>
-          <div class="me-2">
-            <%= f.select :amount, [['1個', 1], ['2個', 2], ['3個', 3], ['4個', 4], ['5個', 5], ['6個', 6], ['7個', 7], ['8個', 8], ['9個', 9]], { prompt: "個数選択" }, class: "form-select" %>
-          </div>
-          <div>
-          <%= f.submit "カートに入れる", class: "btn btn-success" %>
+          <div class="row d-flex">
+            <div class="col-5 mr-3">
+              <%= f.select :amount, [['1個', 1], ['2個', 2], ['3個', 3], ['4個', 4], ['5個', 5], ['6個', 6], ['7個', 7], ['8個', 8], ['9個', 9]], { prompt: "個数選択" }, class: "form-select" %>
+            </div>
+            <div class="col-2">
+              <%= f.submit "カートに入れる", class: "btn btn-success" %>
+            </div>
         <% end %>
-        </div>
-      </div>
-      
-    <% else %>
-      <h3>この商品は販売停止中です。</h3>
-    <% end %>
+          </div>
+
+      <% else %>
+        <h4>この商品は<br>販売停止中です。</h4>
+      <% end %>
+    </div>
   </div>
-</div>
+
+

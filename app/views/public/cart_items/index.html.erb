@@ -1,6 +1,8 @@
 
 <div class='container my-5'>
 
+  <% if @cart_items.any? %>
+
   <div class='row mb-4 d-flex'>
     <h4>
       <span class='heading-title'>ショッピングカート</span>
@@ -19,7 +21,7 @@
             <th class="col-2"></th>
           </tr>
          </thead>
-         
+
          <tbody>
           <% @cart_items.each do |cart_item| %>
           <tr>
