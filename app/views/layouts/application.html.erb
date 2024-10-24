@@ -13,20 +13,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
 
 
+
   </head>
 
   <body>
     <!-- ヘッダー -->
-    <div class="sticky-container">
+    <div id="sticky-container">
       <%= render "layouts/header" %>
     </div>
 
     <!-- Body部分 -->
-    <main>
-      <div class="container">
-        <%= yield %>
-      </div>
-    </main>
+    <div class="container">
+      <%= yield %>
+    </div>
 
 
     <!-- Footer -->
