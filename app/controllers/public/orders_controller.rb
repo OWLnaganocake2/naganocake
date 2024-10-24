@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+    before_action :cartitem_nill,   only: [:new, :create]
     def index
         @orders = current_customer.orders
     end
@@ -25,15 +26,27 @@ class Public::OrdersController < ApplicationController
         @order = Order.new(order_params)
 
         @order.customer_id = current_customer.id
-      if @order.save!
+        
+      if @order.save
         flash[:notice] = "注文情報を作成しました！"
+        
+        @cart_items = current_customer.cart_items
+        @cart_items.each do |cart_item|
+          @order_details = OrderDetail.new
+          @order_details.order_id = @order.id
+          @order_details.item_id = cart_item.item.id
+          @order_details.price = cart_item.item.price
+          @order_details.amount = cart_item.amount
+          @order_details.making_status = 0
+          @order_details.save!
+        end
         CartItem.destroy_all
          redirect_to orders_thanks_path
       else
         flash[:notice] = "注文情報の作成に失敗しました！" 
         redirect_to new_order_path
       end
-
+    end
 
 
     def confirm
@@ -82,24 +95,27 @@ class Public::OrdersController < ApplicationController
     end
 
     def thanks
-        # order = Order.new(params[:order])
-        # order.save
-
-        # cart_items = current_customer.cart_items
-        # cart_items.each do |cart_item|
-        #     order_detail = OrderDetail.new
-        #     order_detail.order_id = order_id
-        #     order_detail.item_id = cart_item.item_id
-        #     order_detail.amount = cart_item.amount
-        #     order_detail.making_status = 0
-        #     order_detail.price = cart_item.item.add_tax_sales_price
-        #     order_detail.save
-        # end
     end
+    
     private
+    
 	def order_params
-		params.require(:order).permit(:status,:total_price,:payment_method,:shipping_fee,:post_code,:address,:name,:customer_id)
+		params.require(:order).permit(
+		                              :total_price,
+		                              :payment_method,
+		                              :shipping_fee,
+		                              :post_code,
+		                              :address,
+		                              :name,
+		                              :status,
+		                              :customer_id
+		                              )
 	end
 
-   
+   def cartitem_nill
+     cart_items = current_customer.cart_items
+     if cart_items.blank?
+      redirect_to cart_items_path
+     end
+   end
 end
