@@ -12,11 +12,27 @@
   </p>
 </div>
 
-<div class='row'>
+<div class='form-group row'>
   <div class='col-3'>
-
+    <%= render 'public/items/sidebar', genres: @genres %>
   </div>
-  <div class='col-8 offset-1'>
-
+  <div class='col-9'>
+    <h4 class='text-center border-bottom'>
+      新着商品
+    </h4>
+    <div class="d-flex flex-wrap">
+      <% @items.each do |item| %>
+        <%= link_to item_path(item.id), class: "text-decoration-none" do %>
+          <div class="card" >
+            <%= image_tag item.get_item_image(300,300), class: "card-img-top rounded shadow-sm" %>
+            <div class="card-body text-body">
+              <h5 class="card-title text-primary"><%= item.name %></h5>
+              <p class="card-text text-primary">¥<%= item.price %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to "商品を見る >>", items_path, class: "right-link" %>
   </div>
 </div>
