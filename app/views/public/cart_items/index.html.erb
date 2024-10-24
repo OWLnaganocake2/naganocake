@@ -48,36 +48,34 @@
             </td>
           </tr>
           <% end %>
-       </tbody>
-      </table>
-    </div>
 
-    <div class = "row d-flex">
-      <div class = "button col-2">
-         <%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %>
-      </div>
+         </tbody>
 
-      <div class="col-6"></div>
-        <table class = "table table-bordered col-4 ml-auto">
-          <tr>
-            <th class="table-secondary col-6">合計金額<th>
-            <%= @cart_items.sum { |item| item.item.add_tax_sales_price * item.amount }.floor.to_s(:delimited, delimiter: ',') %>
-          </tr>
+        <div class="row">
+           <div class="col-xs-2 text-center mt-3">
+             <%= link_to "買い物を続ける", items_path, class: "btn btn-secondary ms-1" %>
+           </div>
+
+           <table class="tcol-xs-4 able table-hover table-bordered col-xs-10" >
+            <tr>
+              <td  class="info">合計金額<td>
+              <td><%= @cart_items.sum { |item| item.item.add_tax_sales_price * item.amount }.floor.to_s(:delimited, delimiter: ',') %></td>
+            </tr>
+           </table>
+        </div>
+
+        <div class="row">
+          <div class="text-center mt-3">
+            <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success" %>
+          </div>
+        </div>
         </table>
     </div>
-
-    <div class="row">
-      <div class="button mx-auto">
-        <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success", style: "width: 200px;" %>
-      </div>
+  </div>
+<% else %>
+  <div class="row justify-content-center" style="height: 70vh;">
+    <div class="col-xs-12 d-flex align-items-center justify-content-center">
+      <h1>カートの中身がありません。</h1>
     </div>
-  
-    <% else %>
-      <div class="row justify-content-center" style="height: 70vh;">
-        <div class="col-xs-12 d-flex align-items-center justify-content-center">
-          <h1>カートの中身がありません。</h1>
-        </div>
-      </div>
-    <% end %>
-
-</div>
+  </div>
+<% end %>

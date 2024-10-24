@@ -5,7 +5,7 @@
   <h4 class='row mb-5'>
     <div>　　　　　</div><span class='heading-title'>注文情報確認</span>
   </h4>
-  
+
   <div class = "row">
     <table class = "table table-bordered col-7">
       <tr class='table-secondary'>
@@ -37,7 +37,7 @@
     <table class = "table table-bordered offset-1 col-4">
       <tr>
         <th class="table-secondary">送料</th>
-        <td><%= params[:order][:shipping_fee].to_s %></td> 
+        <td><%= params[:order][:shipping_fee].to_s %></td>
       </tr>
       <tr>
         <th class="table-secondary">商品合計</th>
@@ -49,25 +49,25 @@
       </tr>
     </table>
   </div>
-    
+
     <br>
-    
+
     <div class="row d-flex">
     <h4><strong>支払方法</strong></h4>
       <p class="ml-3 fw-bold"><%= @payment_method %></p>
     </div>
-    
+
     <br>
-    
+
     <div class="row d-flex">
     <h4><strong>お届け先</strong></h4>
       <p class="ml-3 fw-bold">〒<%= @post_code %> <%= @address %><br>
       <%= @name  %></p>
     </div>
-    
+
     <div class="row justify-content-center">
     <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
-      <%#= f.hidden_field :customer_id, value: current_customer.id %> 
+      <%#= f.hidden_field :customer_id, value: current_customer.id %>
     <%= f.hidden_field :status, value: "waiting_payment" %>
     <%= f.hidden_field :post_code, value: @post_code %>
     <%= f.hidden_field :address, value: @address %>
