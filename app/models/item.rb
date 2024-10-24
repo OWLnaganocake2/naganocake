@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :item_details, presence: true
   validates :price, presence: true
-  validates :is_active, presence: true
+
 
   def add_tax_sales_price
     (self.price * 1.10).round

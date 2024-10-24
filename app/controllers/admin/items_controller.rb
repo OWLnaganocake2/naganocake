@@ -37,7 +37,7 @@ class Admin::ItemsController < ApplicationController
         flash[:notice] = "商品情報を更新しました！"
        else
         flash[:notice] = "商品情報の更新に失敗しました！"  
-        redirect_to edit_admin_item_path(@item)
+        render :edit
        end
     end
   def destroy
