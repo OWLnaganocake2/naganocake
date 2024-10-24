@@ -1,21 +1,27 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 px-sm-0">
-      <h2>商品一覧(全<%= @items_all.count %>件)</h2>
+<div class="row my-5">
+  <div class="col-2">
+    <%= render 'public/items/sidebar', genres: @genres %>
+  </div>
+  <div class="col-9 mt-2">
+    <h3><strong>商品一覧(全<%= @items_all.count %>件)</strong></h3>
+
+    <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-md-3 mb-4">
+        <%= link_to item_path(item) do %>
+          <p><%= image_tag item.get_item_image(200, 150) || "no_image.jpg", width: 200, height: 150 %></p>
+        <% end %>
+        <p><strong>商品名</strong>　<%= item.name %></p>
+        <% if item.is_active == true %>
+          <p><strong>¥<%= item.price.to_s(:delimited) %></strong></p>
+        <% else %>
+          <p><strong>販売停止中</strong></p>
+        <% end %>
+      </div>
+    <% end %>
+  　</div>
+    <div class="row justify-content-center ">
+      <%= paginate @items %>
     </div>
   </div>
-  <div>
-    <% @items.each do |item| %>
-      <%= link_to item_path(item) do %>
-        <p><%= image_tag item.get_item_image(250,200)|| "no_image.jpg" %></p>
-      <% end %>
-      <p>商品名 <%= item.name %></p>
-      <% if item.is_active == true %>
-        <p>¥<%= item.price.to_s(:delimited) %></p>
-      <% else %>
-        <p>販売停止中</p>
-      <% end %>
-    <% end %>
-  </div>
-  <%= paginate @items, class: "text-center" %>
 </div>
