@@ -1,11 +1,10 @@
-<div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h2>注文一覧</h2>
+<div class='container my-5'>
+  <div class="row" style="display: flex; align-items: center; justify-content: space-between;">
+    <h2 style="margin-left: 10px;">注文一覧</h2>
+  </div>
 
-
-    <div class="order-table">
-      <table >
-        <thead class="table-light">
+      <table class="table table-lg">
+        <thead class="thead-light">
           <tr>
             <th>購入日時</th>
             <th>購入者</th>
@@ -20,12 +19,12 @@
               <td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(order) %></td>
               <td><%= order.customer.family_name + order.customer.first_name %></td>
               <td><%= order.order_details.sum(:amount) %></td>
-              <td><%= order.status %></td>
+              <td><%= order.status_i18n %></td>
             </tr>
             <% end %>
             <%= paginate @order_pagenation %>
         </tbody>
       </table>
     </div>
-  </div>
-</div>
+
+

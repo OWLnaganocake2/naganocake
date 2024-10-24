@@ -20,8 +20,8 @@ class Admin::OrdersController < ApplicationController
 		order_details = order.order_details
     order.update(order_params)
 
-		if order.status == "入金確認"
-			order_details.update_all(making_status: "製作待ち")
+		if order.status == "payment_comfirm"
+			order_details.update_all(making_status: "aiting_for_production")
 		end
 		redirect_to admins_order_path(order.id)
 	end
