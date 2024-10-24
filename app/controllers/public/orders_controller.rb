@@ -79,10 +79,15 @@ class Public::OrdersController < ApplicationController
         # 登録済住所が選択された時
         elsif destination == 1
 
-            address = Address.find(params[:address_for_order])
-            @post_code = address.post_code
-            @address = address.address
-            @name = address.name
+            selected_address = current_customer.addresses.find_by(id: params[:order][:address_id])
+              if selected_address
+                @post_code = selected_address.post_code
+                @address = selected_address.address
+                @name = selected_address.name
+              else
+                flash.now[:alert] = '選択された住所が見つかりません。'
+                render :new
+              end
 
         # 新しいお届け先が選択された時
         elsif destination == 2
