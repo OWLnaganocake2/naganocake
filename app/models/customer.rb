@@ -5,9 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # 退会機能
-  def active_for_authentication?
-    super && (is_deleted == false)
-  end
+
 
   validates :family_name, presence: true
   validates :first_name, presence: true
@@ -21,4 +19,8 @@ class Customer < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
+  
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end
