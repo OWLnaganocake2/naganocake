@@ -3,13 +3,17 @@
   <h4 class='row mb-5'>
     <div>　　　　　</div><span class='heading-title'>マイページ</span>
   </h4>
+  <div>
+    <%= flash[:notice] %>
+  </div>
+
   <div class='row my-3'>
     <div class='col-2'>
       <h4><strong>登録情報</strong></h4>
     </div>
       <%= link_to "編集する", customers_information_edit_path, class:"col-2 btn btn-success" %>
   </div>
-  
+
   <table class="table table-bordered secondary col-8">
     <tr>
       <th class="col-2 table-secondary">氏名</th>
@@ -41,14 +45,14 @@
       <td><%= @customer.email %></td>
     </tr>
   </table>
-  
+
   <div class='row my-3'>
     <div class='col-2'>
       <h4><strong>配送先</strong></h4>
     </div>
       <%= link_to '一覧を見る', addresses_path, class: 'col-2 btn btn-primary' %>
   </div>
-  
+
   <div class='row my-3'>
     <div class='col-2'>
       <h4><strong>注文履歴</strong></h4>
