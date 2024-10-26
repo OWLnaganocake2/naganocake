@@ -37,7 +37,7 @@
         </table>
       </div>
     </div>
-  
+
     <div class="col-5">
       <div class="row">
         <strong><label>請求情報</label></strong><br>
@@ -45,7 +45,7 @@
           <tr>
             <th class="col-4 table-secondary">商品合計</th>
             <td class="col-4">
-              <%= (@order.total_price - @order.shipping_fee).to_s(:delimited, delimiter: ',') %>
+              <%= @order.total_price.to_s(:delimited, delimiter: ',') %>
             </td>
           </tr>
           <tr>
@@ -57,7 +57,7 @@
           <tr>
             <th class="table-secondary">ご請求額</th>
             <td>
-              <%= @order.total_price.to_s(:delimited, delimiter: ',') %>
+              <%= (@order.total_price + @order.shipping_fee).to_s(:delimited, delimiter: ',') %>
             </td>
           </tr>
         </table>

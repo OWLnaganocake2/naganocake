@@ -5,7 +5,7 @@
     <%= form_with model: @customer, url: admin_customer_path do |f| %>
 
       <h2><%= @customer.family_name + @customer.first_name %>さんの会員情報編集</h2>
-    
+
       <table class="table table-borderless">
         <tr>
           <th>会員ID</th>
@@ -36,11 +36,11 @@
           <td><%= f.text_field :email, size: "16" %></td>
         </tr>
         <tr>
-          <td>販売ステータス</td>
+          <td>会員ステータス</td>
           <td>
-            <%= f.radio_button :is_deleted, :true %>
-            <%= f.label :is_deleted, "有効"  %>
             <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted, "有効"  %>
+            <%= f.radio_button :is_deleted, :true %>
             <%= f.label :is_deleted, "退会" %>
           </td>
         </tr>
@@ -53,6 +53,6 @@
           </div>
         </tr>
       </table>
- 
+
     <% end %>
   </div>
