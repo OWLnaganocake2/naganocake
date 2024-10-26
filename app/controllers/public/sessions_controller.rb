@@ -40,6 +40,7 @@ class Public::SessionsController < Devise::SessionsController
       end
     else
       flash[:notice] = "該当するユーザーが見つかりません"
+      redirect_to new_customer_session_path
     end
   end
 end

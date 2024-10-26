@@ -10,6 +10,7 @@
       <h5 class="text-center text-white">会員の方はこちらからログイン</h5>
     </div>
   </div>
+  <p style="margin-left: 200px;"><%= flash[:notice] %></p>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-group row">
